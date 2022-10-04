@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 
 var cors = require('cors');
+const PORT = process.env.PORT || 3000;
 app.use(cors())
 
 
@@ -52,7 +53,7 @@ app.put('/school/student/updateTeacher', (req, res) => {
 
 //3 cach de gui data tu FE -> BE: param, query, body(method: POST, create: Create)
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('Server is running at ');
 })
 
