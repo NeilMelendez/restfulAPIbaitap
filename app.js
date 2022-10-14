@@ -5,7 +5,13 @@ var app = Express();
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
-Mongoose.connect("mongodb://localhost:27017/sale_orders_managers");
+Mongoose.connect(
+    "mongodb+srv://shininghopper:Dangkhoa16122001@cluster0.5l8vydy.mongodb.net/sale_orders_managers",
+    (err) => {
+      if (!err) console.log("db connected");
+      else console.log("db error");
+    }
+  );
 
 const PersonModel = Mongoose.model("person",{
     Region: String,
@@ -58,6 +64,19 @@ app.delete("/person/:id", async (request, response) => {
         response.status(500).send(error);
     }
 });
+
+
+
+app.get("/test", async (request, response) => {
+    try {
+        var result = await PersonModel.find();
+        response.send(result);
+    } catch (error) {
+        response.status(500).send(error);
+    }
+});
+
+
 app.listen(3000, () => {
     console.log("Listening at :3000...");
 });
